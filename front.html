@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #0f172a; 
+            color: #f8fafc; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-bottom: 50px;
+        }
+        .card {
+            background: rgba(30, 41, 59, 0.8) !important; 
+            border: 1px solid #475569 !important;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-header {
+            background: transparent !important;
+            border-bottom: 1px solid #334155 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            color: #cbd5e1 !important; 
+            font-weight: 600;
+        }
+        h2 { 
+            font-weight: 800; 
+            margin: 15px 0;
+            color: #ffffff; 
+        }
+        #historyChart {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 15px;
+        }
+
+        /* --- الأكواد الجديدة اللي طلبتيها بدأت من هنا --- */
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .alert-item {
+            background: rgba(220, 38, 38, 0.15); /* خلفية حمراء شفافة */
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-left: 5px solid #ef4444; /* خط أحمر جانبي */
+            color: #fca5a5; /* لون نص فاتح متناسق */
+            font-size: 0.9rem;
+            text-align: left;
+            animation: pulse 2s infinite ease-in-out; /* تطبيق حركة النبض */
+        }
+
+        #alerts {
+            min-height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* --- نهاية الأكواد الجديدة --- */
+    </style> 
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="mb-5 fw-bold text-center">IoT <span style="color: #38bdf8;">Dashboard</span></h1>
+
+    <div class="row mb-4 g-4">
+        <div class="col-md-4">
+            <div class="card text-center shadow">
+                <div class="card-header">Temperature</div>
+                <div class="card-body">
+                    <h2 id="temp">-- °C</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow">
+                <div class="card-header">Humidity</div>
+                <div class="card-body">
+                    <h2 id="humidity" style="color: #38bdf8;">-- %</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow">
+                <div class="card-header border-danger">Alerts</div>
+                <div class="card-body">
+                    <div id="alerts" class="fw-bold">
+                        <span style="color: #4ade80;">System Healthy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card p-3 shadow">
+                <canvas id="historyChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="dashboard.js"></script>
+
+</body>
+</html>
