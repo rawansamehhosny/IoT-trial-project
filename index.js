@@ -31,7 +31,7 @@ function generateAlerts(temp, humidity) {
 }
 () => {
     const mockData = {
-        temp: Math.floor(Mathد.random() * 40),
+        temp: Math.floor(Math.random() * 40),
         humidity: Math.floor(Math.random() * 100),
         timestamp: new Date().toISOString()
     };
